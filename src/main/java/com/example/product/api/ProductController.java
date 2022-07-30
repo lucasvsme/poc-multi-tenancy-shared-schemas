@@ -1,5 +1,6 @@
 package com.example.product.api;
 
+import com.example.internal.TenantReference;
 import com.example.product.Product;
 import com.example.product.ProductRepository;
 import jakarta.validation.Valid;
@@ -31,10 +32,12 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Void> createOne(@Valid @RequestBody ProductRequest productRequest,
                                           UriComponentsBuilder uriComponentsBuilder) {
-        LOGGER.info("Creating new product (request={})", productRequest);
+        final var tenant = TenantReference.get();
+        LOGGER.info("Creating new product (tenant={}, request={})", tenant, productRequest);
 
         final var product = new Product();
         product.setName(productRequest.getName());
+        product.setTenant(tenant);
 
         final var productCreated = productRepository.save(product);
         LOGGER.info("New product created (product={})", productCreated);
@@ -49,10 +52,11 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<ProductsResponse> findAll() {
-        LOGGER.info("Finding all existing products");
+        final var tenant = TenantReference.get();
+        LOGGER.info("Finding all existing products (tenant={})", tenant);
 
         final var products = new ArrayList<ProductResponse>();
-        for (final var product : productRepository.findAll()) {
+        for (final var product : productRepository.findAllByTenant(tenant)) {
             final var productResponse = new ProductResponse();
             productResponse.setId(product.getId());
             productResponse.setName(product.getName());
