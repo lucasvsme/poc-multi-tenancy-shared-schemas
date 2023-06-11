@@ -21,14 +21,18 @@ The Web service is implemented using Spring MVC, data is persisted on Postgres d
 Spring Data JPA. The source code is managed by JUnit with databases provisioned in containers managed by TestContainers
 and no manual configuration is required to run automated tests.
 
+Other approaches to multi-tenancy
+are [Separate Databases](https://github.com/lucasvalenteds/poc-multi-tenancy-separate-databases)
+and [Separate Schemas](https://github.com/lucasvalenteds/poc-multi-tenancy-separate-schemas).
+
 ## How to run
 
-| Description                    | Command                                             |
-|:-------------------------------|:----------------------------------------------------|
-| Run tests                      | `./gradlew test`                                    |
-| Run application                | `./gradlew bootRun`                                 |
-| Provision database¹            | `docker-compose up --detach`                        |
-| Destroy database¹              | `docker-compose down --volumes`                     |
+| Description         | Command                         |
+|:--------------------|:--------------------------------|
+| Run tests           | `./gradlew test`                |
+| Run application     | `./gradlew bootRun`             |
+| Provision database¹ | `docker-compose up --detach`    |
+| Destroy database¹   | `docker-compose down --volumes` |
 
 > ¹Required for manual testing only, automated tests provision and destroy a database automatically. Must run
 > inside `infrastructure` folder.
