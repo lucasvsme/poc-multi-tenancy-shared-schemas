@@ -27,15 +27,10 @@ and [Separate Schemas](https://github.com/lucasvalenteds/poc-multi-tenancy-separ
 
 ## How to run
 
-| Description         | Command                         |
-|:--------------------|:--------------------------------|
-| Run tests           | `./gradlew test`                |
-| Run application     | `./gradlew bootRun`             |
-| Provision database¹ | `docker-compose up --detach`    |
-| Destroy database¹   | `docker-compose down --volumes` |
-
-> ¹Required for manual testing only, automated tests provision and destroy a database automatically. Must run
-> inside `infrastructure` folder.
+| Description     | Command             |
+|:----------------|:--------------------|
+| Run tests       | `./gradlew test`    |
+| Run application | `./gradlew bootRun` |
 
 ## Preview
 
